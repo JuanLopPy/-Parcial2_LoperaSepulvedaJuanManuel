@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Parcial2.DAL.Entities.Ticket>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" />
+<h1>Países</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-outline-primary">Crear Registros</a>
+</p>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" />
+
+<h1>Tickets</h1>
+
+<p>
+    <a asp-action="CreateRecords" class="btn btn-outline-primary">Crear Registros</a>
+</p>
+
+<table id="ticketsTable">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Fecha de uso</th>
+            <th>¿Fue usado?</th>
+            <th>Portería de ingreso</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ticket in Model)
+        {
+            <tr>
+                <td>@ticket.Id</td>
+                <td>@ticket.UseDate</td>
+                <td>@(ticket.IsUsed ? "Sí" : "No")</td>
+                <td>@(ticket.EntranceGate ?? "N/A")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#ticketsTable').DataTable();
+        });
+    </script>
+}

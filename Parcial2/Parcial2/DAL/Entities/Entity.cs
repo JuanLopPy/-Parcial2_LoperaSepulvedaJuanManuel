@@ -12,8 +12,8 @@
         public virtual DateTime UseDate { get; set; }
 
         [Display(Name = ("Uso de la boleta"))]
-        public bool IsUsed { get; set; } = false;
+        public bool IsUsed { get; set; } 
         [Display(Name = ("Portería"))]
-        public String EntranceGate { get; set; } = "Null";
+        public String EntranceGate { get; set; } 
     }
 }

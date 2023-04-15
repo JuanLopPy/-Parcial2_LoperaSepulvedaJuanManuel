@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Parcial2.DAL.Entities.Ticket>
+
+<h1>Tickets generados</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Fecha de uso</th>
+            <th>¿Usado?</th>
+            <th>Puerta de entrada</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ticket in Model)
+        {
+            <tr>
+                <td>@ticket.Id</td>
+                <td>@ticket.UseDate</td>
+                <td>@(ticket.IsUsed ? "Sí" : "No")</td>
+                <td>@ticket.EntranceGate</td>
+            </tr>
+        }
+    </tbody>
+</table>
