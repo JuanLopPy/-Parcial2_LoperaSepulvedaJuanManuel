@@ -25,15 +25,16 @@ namespace Parcial2.Controllers
         [HttpGet]
         public IActionResult CreateRecords()
         {
-            for (int i = 0; i < 500; i++)
+            for (int i = 0; i < 5; i++)
             {
                 var ticket = new Ticket
                 {
+                    Id= i,
                     UseDate = DateTime.Now,
                     IsUsed = false,
                     EntranceGate = null,
                 };
-
+             
                 _context.Tickets.Add(ticket);
             }
 
@@ -46,9 +47,9 @@ namespace Parcial2.Controllers
                 Console.WriteLine(ex.Message);
             }
 
-            var tickets = _context.Tickets.ToList(); // Obtener todos los tickets de la base de datos
+            var tickets = _context.Tickets.ToList(); // Get all tickets from the database
 
-            return View("TicketList", tickets); // Pasar la lista de tickets a la vista
+            return View("TicketList", tickets); // Pass ticket list to view
         }
 
         [HttpPost]
@@ -61,19 +62,20 @@ namespace Parcial2.Controllers
                 ViewBag.ErrorMessage = "Boleta no válida";
                 return View("Index", await _context.Tickets.ToListAsync());
             }
+
             if (ticket.IsUsed)
             {
-                ViewBag.ErrorMessage = $"La boleta ya fue usada el {ticket.UseDate} en la portería {ticket.EntranceGate}";
+                ViewBag.ErrorMessage = $"La boleta ya fue usada el {ticket.UseDate} en la entrada {ticket.EntranceGate}";
                 return View("Index", await _context.Tickets.ToListAsync());
             }
+
             ticket.IsUsed = true;
             ticket.UseDate = DateTime.Now;
             ticket.EntranceGate = entranceGate;
             _context.Update(ticket);
             await _context.SaveChangesAsync();
 
-            ViewBag.SuccessMessage = "Boleta validada correctamente";
-            return View("Success");
+            return RedirectToAction("Success");
         }
 
 
