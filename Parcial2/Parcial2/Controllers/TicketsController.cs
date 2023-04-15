@@ -25,7 +25,7 @@ namespace Parcial2.Controllers
         [HttpGet]
         public IActionResult CreateRecords()
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 50; i++)
             {
                 var ticket = new Ticket
                 {
@@ -51,6 +51,11 @@ namespace Parcial2.Controllers
 
             return View("TicketList", tickets); // Pass ticket list to view
         }
+        public IActionResult ValidateTicketForm()
+        {
+            var ticket = new Ticket();
+            return View(ticket);
+        }
 
         [HttpPost]
         public async Task<IActionResult> ValidateTicket(int id, string entranceGate)
@@ -60,13 +65,13 @@ namespace Parcial2.Controllers
             if (ticket == null)
             {
                 ViewBag.ErrorMessage = "Boleta no válida";
-                return View("Index", await _context.Tickets.ToListAsync());
+                return View("Warning", await _context.Tickets.ToListAsync());
             }
 
             if (ticket.IsUsed)
             {
                 ViewBag.ErrorMessage = $"La boleta ya fue usada el {ticket.UseDate} en la entrada {ticket.EntranceGate}";
-                return View("Index", await _context.Tickets.ToListAsync());
+                return View("Warning", await _context.Tickets.ToListAsync());
             }
 
             ticket.IsUsed = true;
