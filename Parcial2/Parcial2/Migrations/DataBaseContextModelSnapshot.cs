@@ -38,6 +38,9 @@ namespace Parcial2.Migrations
                     b.Property<bool>("IsUsed")
                         .HasColumnType("bit");
 
+                    b.Property<int>("NumTickets")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("UseDate")
                         .HasColumnType("datetime2");
 

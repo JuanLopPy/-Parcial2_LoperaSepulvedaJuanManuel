@@ -12,8 +12,8 @@ using Parcial2.DAL;
 namespace Parcial2.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20230415155745_MyDataBaseCreation2")]
-    partial class MyDataBaseCreation2
+    [Migration("20230428213727_Iniciar")]
+    partial class Iniciar
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,6 +40,9 @@ namespace Parcial2.Migrations
 
                     b.Property<bool>("IsUsed")
                         .HasColumnType("bit");
+
+                    b.Property<int>("NumTickets")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("UseDate")
                         .HasColumnType("datetime2");

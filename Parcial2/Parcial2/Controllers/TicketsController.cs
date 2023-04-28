@@ -25,31 +25,25 @@ namespace Parcial2.Controllers
         [HttpGet]
         public IActionResult CreateRecords()
         {
-            for (int i = 0; i < 50; i++)
+            for (int i = 7; i < 50; i++)
             {
-                var ticket = new Ticket
+                var a = new Ticket
                 {
-                    Id= i,
+                    NumTickets= i,
                     UseDate = DateTime.Now,
                     IsUsed = false,
-                    EntranceGate = null,
+                    EntranceGate = "sur",
                 };
              
-                _context.Tickets.Add(ticket);
+                _context.Tickets.Add(a);
+               
             }
+          
+            _context.SaveChanges();
 
-            try
-            {
-                _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            var Tickets = _context.Tickets.ToList(); // Get all tickets from the database
 
-            var tickets = _context.Tickets.ToList(); // Get all tickets from the database
-
-            return View("TicketList", tickets); // Pass ticket list to view
+            return View("TicketList", Tickets); // Pass ticket list to view
         }
         public IActionResult ValidateTicketForm()
         {
